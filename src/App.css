@@ -24,11 +24,129 @@
   margin-top: 16px;
 }
 
-.waveButton {
+.button {
   cursor: pointer;
   margin-top: 16px;
   padding: 8px;
   border: 0;
   border-radius: 5px;
-  
+}
+
+.vote-buttons-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.vote-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.vote-item > button {
+  margin-bottom: 0.5rem;
+}
+
+.vote-item > .votes {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+a:link,
+button:link:not(.disabled) {
+  color: #265301;
+}
+
+a:visited,
+button:visited:not(.disabled) {
+  color: #437A16;
+}
+
+a:focus {
+  border-bottom: 1px solid;
+  background: #BAE498;
+}
+
+button:focus:not(.disabled) {
+  background: #BAE498;
+}
+
+a:hover {
+  border-bottom: 1px solid;
+  background: #CDFEAA;
+}
+
+button:hover:not(.disabled) {
+  background: #CDFEAA;
+}
+
+a:active,
+button:active:not(.disabled) {
+  background: #265301;
+  color: #CDFEAA;
+}
+
+button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+ 
+.spinner:before {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  margin-top: -33px;
+  border-radius: 50%;
+  border: 1px solid #BAE498;
+  border-top-color: #CDFEAA;
+  border-right-color: #58ad12;
+  border-bottom-color: rgb(57, 219, 70);
+  animation: spinner .6s linear infinite;
+}
+
+.loading-while-mining {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.loading-while-mining > span {
+  display: flex;
+  justify-content: center;
+}
+
+.wait:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+  animation: ellipsis steps(4,end) 900ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 18px;    
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 18px;    
+  }
 }
