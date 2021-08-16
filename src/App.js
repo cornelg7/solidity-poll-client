@@ -51,6 +51,22 @@ export default function App() {
   const getActiveQuestion = async () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
+    const { chainId } = await provider.getNetwork();
+    window.ethereum.on("chainChanged", chainId => {
+      if (Number(chainId) !== 4) {
+        // Network is not Rinkeby
+        setAuthGuard('Wrong network');
+      } else {
+        setAuthGuard('Ok');
+      }
+    });
+    if (chainId !== 4) {
+      // Network is not Rinkeby
+      setAuthGuard('Wrong network');
+      return;
+    } else {
+      setAuthGuard('Ok');
+    }
     const pollContract = new ethers.Contract(contractAddress, contractABI, signer);
     const question = await pollContract.getActiveQuestion();
     setActiveQuestion(question);
@@ -95,6 +111,18 @@ export default function App() {
       }
     </div>
   )
+
+  if (authGuard === 'Wrong network') {
+    return (
+      <div className="mainContainer">
+        <div className="dataContainer">
+          <div className="header">
+            🔁 Change network to Rinkeby
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (authGuard === 'No wallet') {
     return (
